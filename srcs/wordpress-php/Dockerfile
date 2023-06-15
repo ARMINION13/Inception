@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/06/06 16:29:52 by rgirondo          #+#    #+#              #
-#    Updated: 2023/06/15 16:09:42 by rgirondo         ###   ########.fr        #
+#    Created: 2023/06/11 12:59:34 by rgirondo          #+#    #+#              #
+#    Updated: 2023/06/15 18:18:00 by rgirondo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,12 @@ FROM		debian:buster
 
 RUN			apt-get -y					update
 RUN			apt-get -y					upgrade
-RUN			apt -y install				nginx openssh-server openssl
-COPY		./conf/default				/etc/nginx/sites-available/default
-COPY		./conf/nginx.conf			/etc/nginx/nginx.conf
-RUN			mkdir					    /etc/nginx/ssl
-RUN			chmod 700				    /etc/nginx/ssl
-RUN			openssl						req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=SP/ST=Spain/L=Madrid/O=42Madrid/CN=127.0.0.1" -keyout /etc/nginx/ssl/example.key -out /etc/nginx/ssl/example.crt
+RUN			apt -y install				php-mysql php-fpm curl wget
 
-CMD			["nginx", "-g", "daemon off;"]
+WORKDIR		/var/www/html
+RUN			wget						https://wordpress.org/wordpress-6.0.tar.gz
+RUN			tar							-xvzf wordpress-6.0.tar.gz && rm -rf wordpress-6.0.tar.gz
+
+EXPOSE		9000	
+
+CMD [ "bash" ]
