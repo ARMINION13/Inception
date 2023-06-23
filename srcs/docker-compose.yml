@@ -9,3 +9,70 @@
 #    Updated: 2023/06/15 16:24:54 by rgirondo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+version: '3.9'
+
+services:
+  
+  nginx:
+  
+    build:
+
+      context: ./
+
+      dockerfile: ./nginx/Dockerfile
+
+    container_name: nginx
+    
+    image: nginx_1
+
+    ports: 
+      - "443:443"
+
+    networks:
+      - network
+    
+    restart: unless-stopped
+
+  db:
+
+    env_file:
+      - ./.env
+    
+    build:
+
+      context: ./
+
+      dockerfile: ./mariadb/Dockerfile
+
+    container_name: mariadb
+
+    image: madriadb_1
+
+    networks:
+      - network
+
+    #restart: unless-stopped
+
+  wordpress:
+
+    env_file:
+      - ./.env
+
+    build:
+
+      context: ./
+
+      dockerfile: ./wordpress-php/Dockerfile
+
+    container_name: wordpress
+
+    image: wordpress_1
+
+    networks:
+      - network
+
+    #restart: unless-stopped
+
+networks:
+  network:
