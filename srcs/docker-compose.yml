@@ -74,5 +74,23 @@ services:
 
     #restart: unless-stopped
 
+volumes:
+
+  volumen_wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      device: /home/rgirondo/42madrid/wordpress
+      o: bind
+      type: none
+
+  volumen_mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      device: /home/rgirondo/42madrid/mariadb
+      o: bind
+      type: none
+
 networks:
   network:
