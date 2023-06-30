@@ -38,7 +38,7 @@ services:
 
     env_file:
       - ./.env
-    
+
     build:
 
       context: ./
@@ -80,7 +80,7 @@ volumes:
     name: wordpress
     driver: local
     driver_opts:
-      device: /home/rgirondo/42madrid/wordpress
+      device: ~/42madrid/wordpress
       o: bind
       type: none
 
@@ -88,7 +88,7 @@ volumes:
     name: mariadb
     driver: local
     driver_opts:
-      device: /home/rgirondo/42madrid/mariadb
+      device: ~/42madrid/mariadb
       o: bind
       type: none
 
