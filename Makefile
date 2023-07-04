@@ -6,7 +6,7 @@
 #    By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 19:12:53 by rgirondo          #+#    #+#              #
-#    Updated: 2023/06/30 22:19:14 by rgirondo         ###   ########.fr        #
+#    Updated: 2023/07/04 19:35:02 by rgirondo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ $(NAME) :
 		cd srcs && docker-compose up --build
 
 fclean:
+	docker stop $$(docker ps -aq);
 	docker container rm -f $$(docker container ls -aq);
 	docker image rm -f $$(docker image ls -aq);
 	docker volume rm -f $$(docker volume ls -q);
-	#docker network rm $$(docker network ls -q);
+	#docker network rm network;
 
 re: fclean all
