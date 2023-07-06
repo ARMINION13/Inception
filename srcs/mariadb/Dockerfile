@@ -6,7 +6,7 @@
 #    By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 16:29:52 by rgirondo          #+#    #+#              #
-#    Updated: 2023/07/04 19:53:23 by rgirondo         ###   ########.fr        #
+#    Updated: 2023/07/07 00:43:22 by rgirondo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,4 +22,4 @@ COPY        ./mariadb/util.sh                   .
 
 EXPOSE		3306
 
-CMD ["./util.sh"]
+ENTRYPOINT [ "./util.sh" ]

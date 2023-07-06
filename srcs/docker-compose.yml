@@ -31,6 +31,9 @@ services:
 
     networks:
       - network
+
+    logging:
+      driver: "none"
     
     restart: unless-stopped
 
@@ -48,6 +51,9 @@ services:
     container_name: mariadb
 
     image: madriadb_1
+
+    logging:
+      driver: "none"
 
     networks:
       - network
@@ -68,6 +74,9 @@ services:
     container_name: wordpress
 
     image: wordpress_1
+
+    logging:
+      driver: "none"
 
     networks:
       - network
