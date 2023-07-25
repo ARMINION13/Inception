@@ -96,7 +96,7 @@ services:
     networks:
       - network_1
 
-    #restart: unless-stopped
+    restart: unless-stopped
 
 volumes:
 

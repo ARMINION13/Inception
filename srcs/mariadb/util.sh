@@ -2,8 +2,6 @@
 
 /etc/init.d/mysql start
 
-mysql -u root -e ""
-
 echo Creating database.
 
 mysql -e "CREATE DATABASE IF NOT EXISTS $DATABASE;"
@@ -16,18 +14,18 @@ echo Granting privileges to the new user.
 
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${DATABASE_USER}' IDENTIFIED BY '${DATABASE_PASSWORD}';"
 
-echo Changing root password.
-
 mysql -e "FLUSH PRIVILEGES;"
 
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DATABASE_ROOT_PASSWORD';"
+echo Changing root password.
+
+mysql -e "update mysql.user set plugin = 'mysql_native_password' where User = 'root';"
+
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DATABASE_ROOT_PASSWORD';" >> /dev/null
 
 echo Stopping mysql service.
 
-mysql -u root --password=$DATABASE_ROOT_PASSWORD -e "SHUTDOWN;" > /dev/null 2> /dev/null
-
-sleep 2
+mysql -u root -p$DATABASE_ROOT_PASSWORD -e "SHUTDOWN;"
 
 echo Starting mysqld_safe
 
-mysqld_safe
+mysqld

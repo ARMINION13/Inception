@@ -6,7 +6,7 @@
 #    By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 12:59:34 by rgirondo          #+#    #+#              #
-#    Updated: 2023/07/09 11:17:17 by rgirondo         ###   ########.fr        #
+#    Updated: 2023/07/25 06:01:25 by rgirondo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,10 @@ WORKDIR		/var/www/html
 
 RUN			wget						https://wordpress.org/wordpress-6.0.tar.gz
 RUN			tar							-xvzf wordpress-6.0.tar.gz && rm -rf wordpress-6.0.tar.gz
+
+RUN         cp wordpress/wp-config-sample.php wordpress/wp-config.php
+#COPY        ./wordpress-php/conf/wp-config.php     wordpress
+
 RUN         chmod                       -R 755 wordpress
 RUN         chown                       -R www-data:www-data wordpress
 RUN         mv                          wordpress/* .
@@ -30,7 +34,10 @@ COPY        ./wordpress-php/util.sh                   .
 
 RUN         mkdir                       /run/php
 RUN         chmod                       -R 755 /run/php
-RUN         service                     php7.3-fpm stop
+
+RUN         wget                        https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN         chmod +x                    wp-cli.phar
+RUN         mv                          wp-cli.phar                     /usr/local/bin/wp
 
 EXPOSE		9000	
 
