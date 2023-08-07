@@ -23,7 +23,7 @@ services:
 
       context: ./
 
-      dockerfile: ./nginx/Dockerfile
+      dockerfile: ./requirements/nginx/Dockerfile
 
     container_name: nginx
     
@@ -52,7 +52,7 @@ services:
 
       context: ./
 
-      dockerfile: ./mariadb/Dockerfile
+      dockerfile: ./requirements/mariadb/Dockerfile
 
     container_name: mariadb
 
@@ -81,7 +81,7 @@ services:
 
       context: ./
 
-      dockerfile: ./wordpress-php/Dockerfile
+      dockerfile: ./requirements/wordpress-php/Dockerfile
 
     container_name: wordpress
 

@@ -27,6 +27,6 @@ fclean:
 	-docker image rm -f $$(docker image ls -aq);
 	-docker volume rm -f $$(docker volume ls -q);
 	-docker network rm srcs_network_1;
-	rm -rf /home/rgirondo/data
+	#rm -rf /home/rgirondo/data
 
 re: fclean all

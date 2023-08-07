@@ -16,7 +16,7 @@ RUN			apt-get -y					update
 RUN			apt-get -y					upgrade
 RUN			apt -y install				php-mysql php-fpm curl wget vim
 
-COPY        ./wordpress-php/conf/www.conf   /etc/php/7.3/fpm/pool.d/
+COPY        ./requirements/wordpress-php/conf/www.conf   /etc/php/7.3/fpm/pool.d/
 
 WORKDIR		/var/www/html
 
@@ -30,7 +30,7 @@ RUN         chmod                       -R 755 wordpress
 RUN         chown                       -R www-data:www-data wordpress
 RUN         mv                          wordpress/* .
 
-COPY        ./wordpress-php/util.sh                   .
+COPY        ./requirements/wordpress-php/tools/util.sh                   .
 
 RUN         mkdir                       /run/php
 RUN         chmod                       -R 755 /run/php
